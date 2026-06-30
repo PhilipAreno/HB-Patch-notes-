@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS OPS Patch Notes — Jun 30, 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    background: #f2f0ec;
+    color: #1a1a1a;
+    padding: 40px 20px;
+  }
+
+  /* ── PAGE ── */
+  .page {
+    width: 820px;
+    margin: 0 auto 48px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    page-break-after: always;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1e0f3c;
+    padding: 28px 40px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+
+  .header-title span { color: #a855f7; }
+
+  .header-subtitle {
+    font-size: 12px;
+    color: #bbb;
+    margin-top: 5px;
+    font-style: italic;
+  }
+
+  .header-right { text-align: right; }
+
+  .header-date {
+    font-size: 16px;
+    font-weight: 700;
+    color: #d4ff00;
+  }
+
+  .header-page {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 3px;
+  }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    background: #1e0f3c;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 64px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 360px; height: 360px;
+    background: #2d1461;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    right: 80px; bottom: -80px;
+    width: 260px; height: 260px;
+    background: #3b1880;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .cover-eyebrow {
+    font-size: 13px; font-weight: 700;
+    color: #a855f7;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px; z-index: 1;
+  }
+
+  .cover-title {
+    font-size: 56px; font-weight: 900;
+    color: #fff; line-height: 1.05;
+    z-index: 1; margin-bottom: 6px;
+  }
+
+  .cover-title span { color: #a855f7; }
+
+  .cover-tagline {
+    font-size: 16px; color: #ccc;
+    margin-top: 16px; z-index: 1;
+    font-style: italic;
+  }
+
+  .cover-meta {
+    margin-top: 40px; z-index: 1;
+    display: flex; gap: 32px;
+  }
+
+  .cover-meta-label {
+    font-size: 11px; color: #888;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .cover-meta-value {
+    font-size: 15px; font-weight: 700;
+    color: #fff; margin-top: 2px;
+  }
+
+  .cover-meta-value.purple { color: #d4ff00; }
+
+  /* ── CONTENT ── */
+  .content { padding: 32px 40px 40px; }
+
+  /* ── ENTRY CARD ── */
+  .entry {
+    margin-bottom: 28px;
+    border: 1.5px solid #e8e4dc;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px 12px;
+    background: #f8f5ef;
+    border-bottom: 1.5px solid #e8e4dc;
+  }
+
+  .badge {
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  .badge-new     { background: #7c3aed; color: #fff; }
+  .badge-improve { background: #0ea5e9; color: #fff; }
+  .badge-bug     { background: #ef4444; color: #fff; }
+  .badge-comply  { background: #f59e0b; color: #fff; }
+  .badge-coming  { background: #1e0f3c; color: #d4ff00; }
+  .badge-visual  { background: #6b7280; color: #fff; }
+  .badge-maint   { background: #374151; color: #fff; }
+
+  .entry-title {
+    font-size: 15px; font-weight: 800;
+    color: #1e0f3c;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    flex: 1;
+  }
+
+  .entry-date {
+    font-size: 12px; color: #888;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  .entry-body {
+    padding: 16px 20px;
+    display: flex; flex-direction: column;
+    gap: 10px;
+  }
+
+  .field-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px; color: #888;
+    margin-bottom: 3px;
+  }
+
+  .field-value {
+    font-size: 13.5px; color: #2a2a2a;
+    line-height: 1.6;
+  }
+
+  .field-value code {
+    background: #f0edf8;
+    color: #6d28d9;
+    font-size: 12px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: 'SF Mono', monospace;
+  }
+
+  .field-value.cs-guidance {
+    color: #7c3aed;
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #f8f5ef;
+    border-top: 1.5px solid #e8e4dc;
+    padding: 12px 40px;
+    font-size: 11px; color: #aaa;
+    text-align: center; letter-spacing: 0.3px;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { margin: 0; box-shadow: none; border-radius: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ COVER ══════════════════════ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-eyebrow">Homebase Customer Support</div>
+    <div class="cover-title">CS OPS<br><span>PATCH NOTES</span></div>
+    <div class="cover-tagline">What changed. What to know. How to help.</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Issue Date</div>
+        <div class="cover-meta-value purple">Jun 30, 2026</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Entries</div>
+        <div class="cover-meta-value">25 changes</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Source</div>
+        <div class="cover-meta-value">#feature-ready</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Audience</div>
+        <div class="cover-meta-value">Internal Use Only</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 2 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 2</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-coming">COMING SOON</span>
+        <span class="entry-title">Schedule Builder Agent (SBA) — Version 1</span>
+        <span class="entry-date">Jul 27, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">A new AI-powered scheduling mode inside Schedule Builder on OAM Web. When a manager opens an empty week, they're prompted to let the agent build a draft. It generates shifts based on roles and recent patterns, then surfaces conflicts in a sidebar (pending PTO, overtime, clopening, no coverage, stale availability) to resolve before publishing. Fully opt-in — standard Schedule Builder is unchanged. Mobile not in V1. Phased rollout via flag <code>schedule_builder_agent</code>; full target ~Aug 3.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All OAM Web users. Phased rollout starting with locations that have schedule stability ≥70%, availability data for ≥50% of team, and ≥5 scheduled employees.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Direct managers to Schedule Builder → open any unpublished empty week → accept "Let the agent build this." Dismiss with "Not now" to return to manual mode (paused 7 days). If the draft looks off — expected in V1, it's a starting point. If the canvas looks unfamiliar, confirm they opted in; standard view is always available.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Missed Break Corrections — Skip Optional Meal Breaks</span>
+        <span class="entry-date">Jun 29, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">A new sub-toggle — <strong>"Skip optional meal breaks"</strong> — is now available under Settings → Breaks &amp; Compliance → Break settings → Missed break corrections. Default: OFF (no behavior change). When ON, clock-out only prompts about mandatory breaks; optional meal breaks are not flagged. Gated behind rollout flag <code>mbc_mandatory_only</code>.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">OAMs at locations with Missed Break Corrections enabled (~536 locations). Employees only see reduced prompts when an OAM opts in.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Clock-out checklist too long? Settings → Breaks &amp; Compliance → Break settings → Missed break corrections → enable "Skip optional meal breaks." Sub-toggle not visible? Confirm MBC is on and location is on the <code>mbc_mandatory_only</code> rollout.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Employee Termination Flow — Two Updates</span>
+        <span class="entry-date">Jun 25, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">
+            <strong>1. New termination reason: "Project Completed"</strong> — now in the reason dropdown (employee profile + bulk terminate). For planned end-of-gig/show/project employment.<br><br>
+            <strong>2. "Eligible for re-hire" checked by default</strong> — pre-selected on the termination flow. ~70% of terminated employees are rehire-eligible, so this is the common case.
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All customers terminating employees. No rollout flags — both are additive UX changes.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">If a customer asks for a custom termination reason, point them to the dropdown first — we add standard options, not free-form text. The rehire default requires no customer action; managers can uncheck it when needed.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 3 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 3</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Timesheets: Daily Review — Responsive Toolbar</span>
+        <span class="entry-date">Jun 25, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Toolbar controls in the Daily Review tab now wrap on narrow screens instead of overlapping. The team member table scrolls horizontally on small screens so columns stay readable. Clover embedded gets the same layout improvements. Applies to all customers on Daily Review, not only those with the timecard review assistant rollout.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All customers on Timesheets Daily Review, including Clover embedded.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">No action needed. If a customer reports controls looking different on a narrow screen, this is the intended fix — toolbar now wraps cleanly. Not a bug.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Payroll Company Archival — Active Payroll Block</span>
+        <span class="entry-date">Jun 22, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">CS reps can no longer archive companies in ActiveAdmin that have an active payroll subscription. The system now blocks the action to prevent accounts entering a bad state.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">CS reps working in ActiveAdmin. Internal workflow change — no customer-facing impact.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance"><strong>CS workflow change:</strong> Before archiving any company, confirm the payroll subscription is canceled first. Steps: cancel payroll subscription → then archive the company.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-bug">BUG FIX</span>
+        <span class="entry-title">PTO Requests from Terminated Employees — Fixed</span>
+        <span class="entry-date">Jun 18, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Managers will no longer receive any notifications (email, SMS, push, or in-app) for time-off requests from terminated employees. Stale requests are also automatically removed from the Requests Feed inbox.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All managers who receive time-off request notifications.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">If a manager reports receiving PTO notifications from former employees, this fix is live. Requests from terminated employees clear automatically — no action needed from the customer.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 4 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 4</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">New Homebase Left Nav — Now Live for All Customers</span>
+        <span class="entry-date">Jun 17, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">The redesigned left navigation is now at 100%. Key layout changes: <strong>Schedule → Shifts</strong> (time off + availability live here), <strong>Pay</strong> consolidates payroll and tip pooling, <strong>HR</strong> groups HR Pro/Benefits/Documents, <strong>Ops</strong> brings together reports/training/Task Manager/Manager Log. Settings and location picker moved to top-left. Trial status bar visible in nav. Payroll Summaries page removed (redundant with Pay Period review).</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All Homebase customers. Rolled out in phases since May 11; 100% as of June 17.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Every customer is now on the new nav. Any "I can't find X" call is almost certainly a navigation question. Use the new layout names when directing customers — "Schedule" is now "Shifts," "Timesheets" stays, but payroll summary is under Pay Period view → "View summary."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Timesheets — View Summary Navigation Redesign</span>
+        <span class="entry-date">Jun 16, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">The payroll summary is now a dedicated navigable page. <strong>Non-payroll OAMs:</strong> "View summary" navigates directly from the Pay Period view. <strong>Payroll OAMs:</strong> Tools menu → "View summary" or "Download time cards." <strong>Clover OAMs:</strong> "Send to ADP" opens the summary page instead of a modal. All account types get a date picker and breadcrumb. The Download Timesheets modal has been removed.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All OAMs on Timesheets Pay Period view.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Direct customers to Timesheets → Pay Period view → "View summary." Payroll: Tools → "View summary." CSV: Tools → "Download time cards." Clover: "Send to ADP" opens the summary page. The old Download modal is gone — don't reference it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-comply">COMPLIANCE</span>
+        <span class="entry-title">California Alternative Workweek (4×10) OT Support</span>
+        <span class="entry-date">Jun 15, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">CA employers can now enable <strong>"Team member works 4 days, 10-hour shifts, per week"</strong> on an employee's job profile. Daily OT kicks in after 10 hours (not 8). Location: Team → Employee Profile → Job Details → Access &amp; Wages. Opt-in per employee. CA double OT (12+ hrs) and 7th-day OT rules are unchanged.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">CA customers with employees on an approved 4×10 alternative workweek schedule. Rollout flag <code>payroll_california_alternative_workweek</code> at 100%.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Opt-in only — must be enabled per employee after the employer completes CA's alternative workweek election. If a customer asks about 4×10 OT, direct them to Team → Employee Profile → Job Details → Access &amp; Wages.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 5 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 5</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-new">NEW FEATURE</span>
+        <span class="entry-title">Homebase Boost — Hiring</span>
+        <span class="entry-date">Jun 3, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">A new Homebase Boost option is available for OAMs to purchase — a cost-effective way to drive more applicants to job postings. Replaces expensive, less-effective third-party boost options. Available directly in the Hiring product.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">Hiring customers. No formal outbound comms — included in LCM motions.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">If a customer asks about boosting job posts, Homebase Boost is now the recommended option. Direct them to the Hiring product to purchase.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Hiring: General Application Role — All New Users</span>
+        <span class="entry-date">Jun 3, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">All new users to Hiring now see a General Application role from Day 1. Previously this was only available to TLWA winners; it's now available to all new Hiring users automatically.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">New users to Hiring. No action required.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">No CS action needed. New Hiring users will see a General Application role by default — this is expected behavior, not a bug.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Hiring V1 → V2 Migration</span>
+        <span class="entry-date">Jun 8, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">All customers are being migrated from Hiring V1 to V2. As of <strong>June 11:</strong> no new job posts allowed on V1; all inactive V1 users (3+ months) were auto-migrated. Target: 100% off V1 by <strong>July 14, 2026</strong>. Customers notified via email and in-product banners.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All customers still on Hiring V1 and all new Hiring users.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">If a customer can't post a job on V1, direct them to V2. If they report being moved unexpectedly, they were auto-migrated — this is expected. Escalate if V2 experience is broken or data is missing.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 6 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 6</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-visual">VISUAL UPDATE</span>
+        <span class="entry-title">DesignBase Theme Refresh</span>
+        <span class="entry-date">May 27, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Behind-the-scenes design system update refreshing colors, spacing, sizing, strokes, and core component styles (buttons, inputs, badges, alerts, lists, tables, tabs, menus, nav, tooltips). No feature or workflow changes. Some screens may appear slightly inconsistent during the transition while teams migrate remaining legacy components.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All customers will see updated styles. Impact is low and non-disruptive. Mobile and web are aligned on the same updated tokens.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">If a customer flags "something looks different," confirm it's expected and part of a visual refresh. Treat minor inconsistencies between screens as expected during the transition. If something looks actually broken (overlapping text, unreadable colors, broken layouts), file a bug — don't escalate cosmetic differences.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">New Left Navigation — Phase 2 Rollout</span>
+        <span class="entry-date">May 11, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Rollout of the redesigned left navigation to existing companies began May 11 (1K on day 1, up to 10K by week's end). Continued expanding to 35K+ companies through June, reaching 100% on June 17. This entry covers the initial phase; see "Left Nav 100%" entry for full deployment details.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">Existing companies phased in from May 11. New sign-ups already received new nav from day 1. Excludes Clover.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Customers who saw the new nav in this phase received an in-product nudge. If a customer on the new nav needs help navigating, walk them through the updated layout — Schedule is now Shifts, Payroll is now Pay, etc.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Cash Out — Discover Cards Now Accepted</span>
+        <span class="entry-date">May 11, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Discover debit cards are now accepted for Cash Out enrollment — previously blocked. Discover cards are the primary card issuer for Capital One Bank. This unblocks approximately <strong>620 new Cash Out enrollments per month</strong>.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">Employees trying to enroll in Cash Out with a Discover debit card.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Update any FAQ or macro language to include Discover alongside Visa and Mastercard. If an employee previously couldn't enroll due to a Discover card, they can now re-attempt enrollment.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 7 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 7</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Mobile Dashboard — New Hire Documents Card Redesign</span>
+        <span class="entry-date">May 11, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">The New Hire Packet (NHP) card is now pinned to the top of the mobile home screen. Card shows 3 states (Start / In Progress / Overdue), document completion count (e.g., "4 of 7"), days until start date, and overdue status when past the employer's deadline. Card disappears once all items are completed. ~13,500 packets sent monthly.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">New employees with an active New Hire Packet. View logic (when the card appears/disappears) is unchanged — only the placement and context have changed.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">No changes to how NHP works. If employees report issues accessing documents, report to the team. The card should be the most prominent item on the home screen for any new hire with an incomplete packet.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">New Hire Packet — Web Dashboard + Email Redirect Fix</span>
+        <span class="entry-date">May 7, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Four fixes to the NHP completion funnel (completion rate had dropped below 40%): (1) NHP now surfaces on the web employee dashboard; (2) NHP emails redirect directly to the packet after sign-in instead of a login wall dead-end; (3) garbled characters in the email subject line fixed; (4) email-to-completion funnel re-instrumented in Amplitude. Rollout flag: <code>nhp_employee_access_web</code>.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">~13,500 NHP packets sent per month. Large subset of this traffic now expected to go through web.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Employees who previously hit a dead-end login wall from NHP emails can now complete their packet directly on web. If an employee reports not seeing their NHP on the web dashboard, check if they're in the <code>nhp_employee_access_web</code> rollout.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">Break Settings — Full Overhaul</span>
+        <span class="entry-date">May 6, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Major overhaul of the Breaks experience: Break Settings page reorganized with clearer groupings and copy; break policies can now be archived to reduce clutter; employees can enter missed breaks at clock-out even without break waivers enabled; missed break corrections decoupled from break waivers; state-specific availability of break penalties improved; default optional break behavior made consistent.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All customers that use Homebase to track mandatory and optional breaks.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Be ready to walk customers through the reorganized Break Settings page. Employees can now enter missed breaks at clock-out independently of whether the break waiver setting is enabled — this is intentional, not a bug.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 8 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 8</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-visual">VISUAL UPDATE</span>
+        <span class="entry-title">Mobile Time Clock — iOS Refactor</span>
+        <span class="entry-date">May 6, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Full refactor of the iOS mobile time clock to Swift for a more robust foundation. Updated UI makes it easier for employees to see shift details and their location on the map relative to work. <strong>No functional changes</strong> — clock-in/out behavior is identical. Re-enabled after a brief issue reported by Lime employees; fixed in v5.05.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">All customers using the mobile time clock on iOS. Confirm customers are on v5.05 or later if they report issues.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">If a customer reports issues with the iOS time clock, first confirm they're on v5.05 or later. The updated UI shows shift details and map — if something looks unfamiliar, that's the new look (not a bug). Escalate functional blockers (can't clock in/out).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-new">NEW FEATURE</span>
+        <span class="entry-title">Top Local Workplace Awards (TLWA) 2026</span>
+        <span class="entry-date">May 4, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Third edition of the TLWA program celebrating Homebase customers during National Small Business Week (May 3–9). 55K winning locations (~780K owners, managers, and employees) received an in-app full-screen takeover on May 4, push notifications over 3 days, and marketing emails. Live in-product through June 4. A re-engagement campaign ran May 18 for customers who hadn't yet engaged.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">Qualifying locations meeting Homebase activity thresholds (shifts, hours, payroll, messaging, hires) between April 2025 and March 2026.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">The campaign is now over (ended June 4). If customers ask about the award or in-app experience, it has ended. If Hiring V1 winners ask about V2 migration as part of TLWA, see the TLWA V1 Winners Migration entry.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-improve">IMPROVEMENT</span>
+        <span class="entry-title">TLWA: Hiring V1 Winners — V2 Migration Path</span>
+        <span class="entry-date">May 4, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">~4K V1 Hiring locations that won TLWA can now migrate to Hiring V2 themselves from within the product. Most can switch directly; ~400 locations without wage rates on file can schedule a Calendly with trained migration support staff.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">TLWA-winning locations still on Hiring V1. Customers are notified via an in-product banner.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">If a V1 customer is having trouble migrating, direct them to the in-product flow. For the ~400 without wage rates, they'll see a Calendly link to schedule migration support. Answer V2 questions as needed. Escalate if data is missing post-migration.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+<!-- ══════════════════════ PAGE 9 ══════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-title">CS OPS <span>PATCH NOTES</span></div>
+      <div class="header-subtitle">What changed. What to know. How to help.</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">JUN 30, 2026</div>
+      <div class="header-page">Page 9</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-new">NEW FEATURE</span>
+        <span class="entry-title">PAR POS Integration Go-Live</span>
+        <span class="entry-date">Apr 30, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">New integration allowing customers using PAR POS terminals to sync sales, tips, employees, and timecards to Homebase. Initial target audience: ~300 current and former Scooter's Coffee customers. First onboarding anticipated May 7 (pending PAR location token acquisition). Email campaign running Day 0 through Day 60.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">PAR POS customers — initially ~300 Scooter's Coffee locations. Broader rollout to follow.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Be aware of this integration for incoming questions from PAR / Scooter's Coffee customers. Readiness to support onboarding customers is key. Escalate integration issues to the product team.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-new">NEW FEATURE</span>
+        <span class="entry-title">Cash Out — Web Enrollment (Phase 1)</span>
+        <span class="entry-date">Week of May 4, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Employees can now enroll in Cash Out without downloading the Homebase mobile app. Phase 1 entry points: (1) SMS sent to employees with a phone number on file; (2) QR code displayed at Timeclock kiosk locations at end of shift. Both routes lead to the same web enrollment flow as the app. Reaches ~100K employees in Phase 1.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">~100K employees for Phase 1. Must have a phone number on file with Homebase, or work at a Timeclock location.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">Enrollment flow is identical to the in-app experience — same steps, same verification. If an employee asks how to enroll without the app, point them to the SMS link or QR code at their Timeclock kiosk.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="badge badge-maint">MAINTENANCE</span>
+        <span class="entry-title">Gusto API Upgrade</span>
+        <span class="entry-date">Apr 27, 2026</span>
+      </div>
+      <div class="entry-body">
+        <div class="field">
+          <div class="field-label">What Changed</div>
+          <div class="field-value">Homebase's Gusto API upgraded to the latest supported version. Backend system changes only to timesheet export handling. No impact on user experience; no customer action required.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Audience</div>
+          <div class="field-value">Customers connected to Gusto.</div>
+        </div>
+        <div class="field">
+          <div class="field-label">CS Guidance</div>
+          <div class="field-value cs-guidance">No proactive action needed. If customers report errors when exporting timesheets to Gusto after Apr 27, escalate to the product team immediately.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">Homebase Customer Support &nbsp;•&nbsp; Internal Use Only &nbsp;•&nbsp; Source: #feature-ready</div>
+</div>
+
+</body></html>
